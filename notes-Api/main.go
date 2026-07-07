@@ -12,7 +12,9 @@ func main() {
 	mux := http.NewServeMux()
 	server := handler.NewServer()
 
-	mux.HandleFunc("/", server.Health)
+	
+	mux.HandleFunc("/notes", server.Notes)
+	
 
 	port := os.Getenv("PORT")
 	if port == "" {
