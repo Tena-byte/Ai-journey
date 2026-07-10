@@ -11,12 +11,12 @@ func (s *Server) CreateNote(w http.ResponseWriter, r *http.Request) {
 
 	var req CreateNoteRequest
 
+	defer r.Body.Close()
+
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, "invalid JSON request body", 400)
 		return
 	}
-
-	defer r.Body.Close()
 
 	if strings.TrimSpace(req.Title) == "" {
 		http.Error(w, "Title can not be empty", http.StatusBadRequest)

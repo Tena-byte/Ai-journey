@@ -12,9 +12,12 @@ func main() {
 	mux := http.NewServeMux()
 	server := handler.NewServer()
 
-	
-	mux.HandleFunc("/notes", server.Notes)
-	
+	mux.HandleFunc("GET /notes", server.ListNotes)
+	mux.HandleFunc("POST /notes", server.CreateNote)
+
+	//mux.HandleFunc("GET /notes/{id}", server.GetNote)
+	mux.HandleFunc("PUT /notes/{id}", server.UpdateNote)
+	//mux.HandleFunc("DELETE /notes/{id}", server.DeleteNote)
 
 	port := os.Getenv("PORT")
 	if port == "" {

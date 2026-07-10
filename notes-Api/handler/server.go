@@ -15,6 +15,7 @@ type CreateNoteRequest struct {
 	Content string `json:"content"`
 }
 
+
 type Server struct {
 	notes map[string]Note
 	mu    sync.Mutex
