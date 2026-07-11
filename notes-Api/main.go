@@ -23,8 +23,8 @@ func main() {
 	if port == "" {
 		port = "7000"
 	}
-	log.Println("server is running on http://localhost:7000 .....")
+	log.Printf("server is running on http://localhost:%s ...", port)
 	if err := http.ListenAndServe(":"+port, mux); err != nil {
-		log.Fatal("Server not running")
+		log.Fatalf("server failed: %v", err)
 	}
 }

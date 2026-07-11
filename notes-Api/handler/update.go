@@ -29,6 +29,25 @@ func (s *Server) UpdateNote(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//note, exists := s.notes[id]
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	note, exists := s.notes[id]
+
+	if !exists {
+		http.Error(w, "Id Not Found", http.StatusNotFound)
+		return
+	}
+
+	note.Title = req.Title
+	note.Content = req.Content
+	s.notes[id] = note
+
+	w.Header().Set("Content-Type", "application/json")
+
+	if err := json.NewEncoder(w).Encode(note); err != nil {
+		http.Error(w, "failed to encode response", http.StatusInternalServerError)
+		return
+	}
 
 }

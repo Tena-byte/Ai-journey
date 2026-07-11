@@ -41,7 +41,6 @@ func (s *Server) CreateNote(w http.ResponseWriter, r *http.Request) {
 
 	s.notes[note.ID] = note
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
 
 	if err := json.NewEncoder(w).Encode(note); err != nil {
 		http.Error(w, "failed to encode response", http.StatusInternalServerError)
