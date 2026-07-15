@@ -31,7 +31,7 @@ func (s *Server) CreateNote(w http.ResponseWriter, r *http.Request) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	idStr := strconv.Itoa(len(s.notes) + 1)
+	idStr := strconv.Itoa(s.nextID)
 
 	note := Note{
 		ID:      idStr,
@@ -40,6 +40,8 @@ func (s *Server) CreateNote(w http.ResponseWriter, r *http.Request) {
 	}
 
 	s.notes[note.ID] = note
+	s.nextID++
+
 	w.Header().Set("Content-Type", "application/json")
 
 	if err := json.NewEncoder(w).Encode(note); err != nil {

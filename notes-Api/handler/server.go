@@ -19,10 +19,12 @@ type CreateNoteRequest struct {
 type Server struct {
 	notes map[string]Note
 	mu    sync.Mutex
+	nextID int
 }
 
 func NewServer() *Server {
 	return &Server{
 		notes: make(map[string]Note),
+		nextID: 1,
 	}
 }
