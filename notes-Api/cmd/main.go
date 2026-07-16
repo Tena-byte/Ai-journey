@@ -3,11 +3,16 @@ package main
 import (
 	"log"
 	"net/http"
-	"notes-Api/handler"
+	"notes-Api/internals/handler"
 	"os"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("error loading .env file")
+	}
 
 	mux := http.NewServeMux()
 	server := handler.NewServer()
