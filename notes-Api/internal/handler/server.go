@@ -15,16 +15,15 @@ type CreateNoteRequest struct {
 	Content string `json:"content"`
 }
 
-
 type Server struct {
-	notes map[string]Note
-	mu    sync.Mutex
+	notes  map[string]Note
+	mu     sync.Mutex
 	nextID int
 }
 
-func NewServer() (*Server, error ){
+func NewServer() *Server {
 	return &Server{
-		notes: make(map[string]Note),
+		notes:  make(map[string]Note),
 		nextID: 1,
-	}, nil
+	}
 }
