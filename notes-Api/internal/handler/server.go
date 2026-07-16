@@ -22,9 +22,9 @@ type Server struct {
 	nextID int
 }
 
-func NewServer() *Server {
+func NewServer() (*Server, error ){
 	return &Server{
 		notes: make(map[string]Note),
 		nextID: 1,
-	}
+	}, nil
 }

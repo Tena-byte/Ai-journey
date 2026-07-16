@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
-	"notes-Api/internals/handler"
+	"notes-Api/internal/handler"
 	"os"
 	"github.com/joho/godotenv"
 )
